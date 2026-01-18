@@ -168,7 +168,7 @@ body {
   border-color: rgba(214,214,222,.75);
 }
 
-/* Активная вкладка — красиво, но без перегруза */
+/* Активная вкладка */
 .pill.active {
   background: linear-gradient(90deg, rgba(47,158,68,.16), rgba(59,130,246,.10));
   border-color: rgba(47,158,68,.55);
@@ -177,7 +177,7 @@ body {
   box-shadow: 0 12px 26px rgba(47,158,68,.08);
 }
 
-/* Левый индикатор активной вкладки */
+/* лівий індикатор активної вкладки */
 .pill.active::before{
   content:"";
   position:absolute;
@@ -191,7 +191,6 @@ body {
   opacity: .9;
 }
 
-/* Чтобы текст не налезал на индикатор */
 .pill.active{ padding-left: 26px; }
 
 /* =========================

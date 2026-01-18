@@ -1,0 +1,32 @@
+<section class="report">
+  <h2>Селектори ідентифікатора (ID)</h2>
+  <p>
+    Селектор ідентифікатора застосовується до одного елемента з конкретним значенням атрибута <code>id</code>.
+    У проєкті ID використовуються для навігації по секціях, а також (для ЛР2) — для точкового стилювання.
+  </p>
+
+  <h3>CSS (селектори ID)</h3>
+  <pre><code>#hero-title{
+  text-shadow: 0 8px 22px rgba(2,6,23,.20);
+}
+
+#contacts{
+  border: 1px solid rgba(59,130,246,.22);
+}</code></pre>
+
+  <h3>HTML (де застосовано)</h3>
+  <pre><code>&lt;section id="hero" class="hero container" aria-labelledby="hero-title"&gt;
+  &lt;h1 id="hero-title"&gt;Футбольні легенди...&lt;/h1&gt;
+&lt;/section&gt;
+
+&lt;section id="contacts" class="container" aria-labelledby="contacts-title"&gt;
+  &lt;h2 id="contacts-title"&gt;Контакти&lt;/h2&gt;
+  ...
+&lt;/section&gt;</code></pre>
+
+  <h3>Результат у браузері</h3>
+  <figure class="shot">
+    <img src="images/selectorid.png" alt="Скрін результату: селектори ID">
+    <figcaption>Рис. 2.3 — Приклад застосування селекторів ID (#hero-title, #contacts).</figcaption>
+  </figure>
+</section>

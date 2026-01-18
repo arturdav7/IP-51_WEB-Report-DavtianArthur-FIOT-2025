@@ -1,0 +1,44 @@
+<section class="report">
+  <h2>Селектори тегу</h2>
+  <p>
+    Селектор тегу застосовується до всіх елементів певного типу (наприклад <code>body</code>,
+    <code>h1</code>, <code>p</code>, <code>main</code>, <code>section</code>).
+  </p>
+
+  <h3>CSS (селектор тегу)</h3>
+  <pre><code>body{
+  margin:0;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--ink);
+  line-height:1.65;
+  background: ...;
+}
+
+h1,h2,h3{
+  line-height:1.15;
+  margin:0 0 10px;
+}
+
+p{
+  margin:0 0 10px;
+  color:var(--ink);
+}</code></pre>
+
+  <h3>HTML (де застосовано)</h3>
+  <pre><code>&lt;body&gt;
+  &lt;header class="container site-header"&gt;...&lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;section id="hero" class="hero container"&gt;
+      &lt;h1 id="hero-title"&gt;...&lt;/h1&gt;
+      &lt;p class="lead"&gt;...&lt;/p&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+&lt;/body&gt;</code></pre>
+
+  <h3>Результат у браузері</h3>
+  <figure class="shot">
+    <img src="images/page.png" alt="Скрін результату: селектори тегу">
+    <figcaption>Рис. 2.1 — Приклад застосування селекторів тегу (body, h1, p).</figcaption>
+  </figure>
+</section>

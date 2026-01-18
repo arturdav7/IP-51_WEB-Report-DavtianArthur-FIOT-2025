@@ -1,0 +1,40 @@
+<section class="report">
+  <h2>Інші селектори</h2>
+  <p>
+    У проєкті застосовано універсальний селектор, дочірній селектор, псевдокласи та псевдоелементи.
+    Це дозволяє зробити інтерфейс більш “живим” (hover-ефекти, glow-рамки, анімації).
+  </p>
+
+  <h3>Приклад 1 — універсальний селектор *</h3>
+  <pre><code>*{ box-sizing: border-box; }</code></pre>
+
+  <h3>Приклад 2 — дочірній селектор &gt;</h3>
+  <pre><code>.card &gt; *{ position:relative; z-index:1; }</code></pre>
+
+  <h3>Приклад 3 — псевдоклас :hover</h3>
+  <pre><code>.menu a:hover{
+  background:rgba(255,255,255,.14);
+  transform: translateY(-1px);
+}</code></pre>
+
+  <h3>Приклад 4 — псевдоелементи ::before та ::after</h3>
+  <pre><code>.card::before{ ... }
+.card::after{ ... }
+
+.menu a::after{
+  content:"";
+  height:2px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+}</code></pre>
+
+  <h3>Приклад 5 — селектор атрибута</h3>
+  <pre><code>input[type="email"]{
+  border-color: rgba(34,197,94,.35);
+}</code></pre>
+
+  <h3>Результат у браузері</h3>
+  <figure class="shot">
+    <img src="images/other.png" alt="Скрін результату: інші селектори">
+    <figcaption>Рис. 2.4 — Приклад інших селекторів (*, &gt;, :hover, ::after, [type="email"]).</figcaption>
+  </figure>
+</section>

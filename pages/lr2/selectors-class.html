@@ -1,0 +1,58 @@
+<section class="report">
+  <h2>Селектори класу</h2>
+  <p>
+    Селектор класу застосовується до елементів, які мають атрибут <code>class</code>.
+    У проєкті активно використовуються класи для структури, меню, кнопок, карток та блоків.
+  </p>
+
+  <h3>CSS (селектори класу)</h3>
+  <pre><code>.container{
+  width:min(var(--container), 100%);
+  margin:0 auto;
+  padding:18px 16px;
+}
+
+.site-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  background:rgba(7,27,18,.55);
+}
+
+.menu a{
+  display:inline-block;
+  color:rgba(255,255,255,.88);
+  padding:8px 12px;
+  border-radius:999px;
+}
+
+.btn{
+  display:inline-flex;
+  padding:10px 14px;
+  border-radius:12px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  color:#fff;
+}</code></pre>
+
+  <h3>HTML (де застосовано)</h3>
+  <pre><code>&lt;header class="container site-header"&gt;
+  &lt;a class="logo" href="#hero"&gt;R9 &amp; Zidane&lt;/a&gt;
+
+  &lt;nav&gt;
+    &lt;ul class="menu"&gt;
+      &lt;li&gt;&lt;a href="#hero"&gt;Головна&lt;/a&gt;&lt;/li&gt;
+      ...
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;a class="btn" href="#legends"&gt;Дивитися профілі&lt;/a&gt;</code></pre>
+
+  <h3>Результат у браузері</h3>
+  <figure class="shot">
+    <img src="images/class.png" alt="Скрін результату: селектори класу">
+    <figcaption>Рис. 2.2 — Приклад застосування селекторів класу (.site-header, .menu, .btn).</figcaption>
+  </figure>
+</section>

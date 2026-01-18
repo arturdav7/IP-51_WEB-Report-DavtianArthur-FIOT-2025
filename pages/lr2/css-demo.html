@@ -1,0 +1,77 @@
+<section class="report">
+  <h2>CSS: шрифти, текст, фон, контур, таблиці, списки</h2>
+
+  <h3>1) Шрифти + колір тексту + фон</h3>
+  <pre><code>body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--ink);
+  background: ...;
+}
+
+.lead{
+  font-size:1.05rem;
+  color:rgba(15,23,42,.82);
+}</code></pre>
+
+  <h3>2) Контур (outline) + фокус</h3>
+  <pre><code>input:focus, textarea:focus{
+  border-color: rgba(59,130,246,.55);
+  box-shadow: 0 0 0 4px rgba(59,130,246,.18);
+}</code></pre>
+
+  <h3>3) Демонстрація таблиці (приклад у звіті)</h3>
+  <p>Таблиця створена у звітному документі для демонстрації CSS-властивостей таблиць.</p>
+
+  <pre><code>&lt;table class="demo-table"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Елемент&lt;/th&gt;&lt;th&gt;Приклад&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;.btn&lt;/td&gt;&lt;td&gt;Кнопка (градієнт)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;.card&lt;/td&gt;&lt;td&gt;Картка досягнення&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;#contacts&lt;/td&gt;&lt;td&gt;Секція контактів&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+
+  <pre><code>.demo-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(15,23,42,.12);
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.demo-table th, .demo-table td{
+  padding:10px 12px;
+  border-bottom:1px solid rgba(15,23,42,.10);
+  text-align:left;
+}
+
+.demo-table thead th{
+  background:rgba(59,130,246,.10);
+}</code></pre>
+
+  <table class="demo-table">
+    <thead>
+      <tr><th>Елемент</th><th>Приклад</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>.btn</td><td>Кнопка (градієнт)</td></tr>
+      <tr><td>.card</td><td>Картка досягнення</td></tr>
+      <tr><td>#contacts</td><td>Секція контактів</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4) Багаторівневий список (приклад у звіті)</h3>
+  <pre><code>&lt;ul class="demo-list"&gt;
+  &lt;li&gt;Header
+    &lt;ul&gt;
+      &lt;li&gt;Logo&lt;/li&gt;
+      &lt;li&gt;Menu&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Main
+    &lt;ul&gt;
+      &lt;li&gt;Hero&lt;/li&gt

@@ -1,0 +1,49 @@
+<h2>Завдання №2 — Дні тижня (switch-case)</h2>
+
+<p><strong>Умова (варіант парний):</strong> Змінна <code>day</code> може набувати одне із 7 значень: '1', '2'… '7' (запитуй через prompt). Якщо '1' — понеділок, '2' — вівторок, і т.д. Розв'яжіть через <code>switch-case</code>. Не забудьте про <code>default</code>. Значення змінної <code>finish</code> вивести в консоль.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>let day    = prompt("Введіть номер дня тижня (1–7):");
+let finish;
+
+switch (day) {
+  case '1': finish = "Понеділок";  break;
+  case '2': finish = "Вівторок";   break;
+  case '3': finish = "Середа";     break;
+  case '4': finish = "Четвер";     break;
+  case '5': finish = "П'ятниця";   break;
+  case '6': finish = "Субота";     break;
+  case '7': finish = "Неділя";     break;
+  default:  finish = "Невірне значення! Введіть число від 1 до 7.";
+}
+
+console.log(finish);</code></pre>
+
+<br>
+<button onclick="runTask2()" style="padding:8px 18px;background:#2f9e44;color:white;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">▶ Запустити</button>
+
+<p style="margin-top:12px"><strong>Результат:</strong></p>
+<div id="out-task2" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#166534;min-height:36px">
+  — натисніть «Запустити» —
+</div>
+
+<script>
+function runTask2() {
+  let day    = prompt("Введіть номер дня тижня (1–7):");
+  let finish;
+  switch (day) {
+    case '1': finish = "Понеділок";  break;
+    case '2': finish = "Вівторок";   break;
+    case '3': finish = "Середа";     break;
+    case '4': finish = "Четвер";     break;
+    case '5': finish = "П'ятниця";   break;
+    case '6': finish = "Субота";     break;
+    case '7': finish = "Неділя";     break;
+    default:  finish = "Невірне значення! Введіть число від 1 до 7.";
+  }
+  console.log(finish);
+  document.getElementById('out-task2').textContent = finish;
+}
+</script>

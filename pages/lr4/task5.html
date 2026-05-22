@@ -1,0 +1,41 @@
+<h2>Завдання №5 — Функція makeTransaction() з перевіркою балансу</h2>
+
+<p><strong>Умова (варіант парний):</strong> Оголосити функцію <code>makeTransaction(quantity, pricePerDroid, customerCredits)</code>. Якщо загальна вартість перевищує кредити клієнта — повернути <code>"Insufficient funds!"</code>. Інакше — <code>"You ordered &lt;quantity&gt; droids worth &lt;totalPrice&gt; credits!"</code>.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>function makeTransaction(quantity, pricePerDroid, customerCredits) {
+  let totalPrice = quantity * pricePerDroid;
+
+  if (totalPrice > customerCredits) {
+    return "Insufficient funds!";
+  }
+  return `You ordered ${quantity} droids worth ${totalPrice} credits!`;
+}
+
+// Виклики функції:
+console.log( makeTransaction(3, 100, 500) );  // вистачає:  300 <= 500
+console.log( makeTransaction(5, 200, 500) );  // не вистачає: 1000 > 500
+console.log( makeTransaction(2, 250, 500) );  // рівно:     500 <= 500</code></pre>
+
+<br>
+<p><strong>Результат виконання (Console):</strong></p>
+<div id="out-task5" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#166534;white-space:pre-line"></div>
+
+<script>
+(function() {
+  function makeTransaction(quantity, pricePerDroid, customerCredits) {
+    let totalPrice = quantity * pricePerDroid;
+    if (totalPrice > customerCredits) return "Insufficient funds!";
+    return `You ordered ${quantity} droids worth ${totalPrice} credits!`;
+  }
+  let lines = [
+    `makeTransaction(3, 100, 500) → ${makeTransaction(3, 100, 500)}`,
+    `makeTransaction(5, 200, 500) → ${makeTransaction(5, 200, 500)}`,
+    `makeTransaction(2, 250, 500) → ${makeTransaction(2, 250, 500)}`,
+  ];
+  lines.forEach(l => console.log(l));
+  document.getElementById('out-task5').textContent = lines.join('\n');
+})();
+</script>

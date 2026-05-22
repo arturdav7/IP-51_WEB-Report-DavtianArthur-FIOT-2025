@@ -1,0 +1,36 @@
+<h2>Завдання №4 — Функція getShippingMessage()</h2>
+
+<p><strong>Умова (варіант парний):</strong> Оголосити функцію <code>getShippingMessage(country, price, deliveryFee)</code>, яка повертає рядок з повідомленням про доставку: <em>"Shipping to &lt;country&gt; will cost &lt;totalPrice&gt; credits"</em>, де <code>totalPrice = price + deliveryFee</code>.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>function getShippingMessage(country, price, deliveryFee) {
+  let totalPrice = price + deliveryFee;
+  return `Shipping to ${country} will cost ${totalPrice} credits`;
+}
+
+// Виклики функції:
+console.log( getShippingMessage("Ukraine", 500, 50)   );
+console.log( getShippingMessage("Germany", 1200, 150) );
+console.log( getShippingMessage("France",  800, 95)   );</code></pre>
+
+<br>
+<p><strong>Результат виконання (Console):</strong></p>
+<div id="out-task4" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#166534;white-space:pre-line"></div>
+
+<script>
+(function() {
+  function getShippingMessage(country, price, deliveryFee) {
+    let totalPrice = price + deliveryFee;
+    return `Shipping to ${country} will cost ${totalPrice} credits`;
+  }
+  let lines = [
+    getShippingMessage("Ukraine", 500, 50),
+    getShippingMessage("Germany", 1200, 150),
+    getShippingMessage("France",  800, 95),
+  ];
+  lines.forEach(l => console.log(l));
+  document.getElementById('out-task4').textContent = lines.join('\n');
+})();
+</script>

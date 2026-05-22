@@ -1,0 +1,118 @@
+<h2>Завдання №7 — Варіант 4: Масиви A, B → C + сортування бульбашкою</h2>
+
+<p><strong>Умова (варіант 4):</strong></p>
+<p><strong>Частина 1.</strong> Задані одновимірні масиви А, В з 10 чисел. Побудувати масив С, кожний елемент якого обчислюється за формулою:</p>
+<p style="margin:8px 0 8px 20px">
+  c<sub>i</sub> = 1 / (a<sub>i</sub> − b<sub>i</sub>),&nbsp; якщо a<sub>i</sub> ≠ b<sub>i</sub><br>
+  c<sub>i</sub> = 1,&nbsp; якщо a<sub>i</sub> = b<sub>i</sub>
+</p>
+<p>В масиві С поміняти максимальний елемент і перший. Вивести масиви до переставлення елементів та після.</p>
+<p><strong>Частина 2.</strong> Упорядкувати масив С у порядку зростання методом бульбашки. Надрукувати вхідний та вихідний масив.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>// ── Частина 1: Побудова масиву C ─────────────────────────
+
+function buildC(a, b) {
+  let c = [];
+  for (let i = 0; i < a.length; i++) {
+    c.push(a[i] !== b[i] ? 1 / (a[i] - b[i]) : 1);
+  }
+  return c;
+}
+
+function findMaxIndex(arr) {
+  let maxIdx = 0;
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] > arr[maxIdx]) maxIdx = i;
+  }
+  return maxIdx;
+}
+
+function swapWithFirst(arr, idx) {
+  let copy = [...arr];
+  [copy[0], copy[idx]] = [copy[idx], copy[0]];
+  return copy;
+}
+
+const A = [3, 7, 2, 9, 1, 5, 4, 8, 6, 10];
+const B = [1, 4, 2, 3, 6, 2, 7, 5, 3,  8];
+
+let C       = buildC(A, B);
+let maxIdx  = findMaxIndex(C);
+let C_after = swapWithFirst(C, maxIdx);
+
+console.log("Масив A:", A);
+console.log("Масив B:", B);
+console.log("Масив C (до):",  C.map(v => +v.toFixed(4)));
+console.log(`Індекс max: ${maxIdx}, значення: ${C[maxIdx].toFixed(4)}`);
+console.log("Масив C (після):", C_after.map(v => +v.toFixed(4)));
+
+// ── Частина 2: Сортування бульбашкою ─────────────────────
+
+function bubbleSort(arr) {
+  let sorted = [...arr];
+  for (let i = 0; i < sorted.length - 1; i++) {
+    for (let j = 0; j < sorted.length - 1 - i; j++) {
+      if (sorted[j] > sorted[j + 1]) {
+        [sorted[j], sorted[j + 1]] = [sorted[j + 1], sorted[j]];
+      }
+    }
+  }
+  return sorted;
+}
+
+console.log("\n── Сортування бульбашкою ──");
+console.log("C до сортування:   ", C_after.map(v => +v.toFixed(4)));
+console.log("C після сортування:", bubbleSort(C_after).map(v => +v.toFixed(4)));</code></pre>
+
+<br>
+<p><strong>Результат виконання (Console):</strong></p>
+<div id="out-task7" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#166534;white-space:pre-line"></div>
+
+<script>
+(function() {
+  function buildC(a, b) {
+    return a.map((ai, i) => ai !== b[i] ? 1 / (ai - b[i]) : 1);
+  }
+  function findMaxIndex(arr) {
+    return arr.reduce((mi, v, i, a) => v > a[mi] ? i : mi, 0);
+  }
+  function swapWithFirst(arr, idx) {
+    let c = [...arr];
+    [c[0], c[idx]] = [c[idx], c[0]];
+    return c;
+  }
+  function bubbleSort(arr) {
+    let s = [...arr];
+    for (let i = 0; i < s.length - 1; i++)
+      for (let j = 0; j < s.length - 1 - i; j++)
+        if (s[j] > s[j+1]) [s[j], s[j+1]] = [s[j+1], s[j]];
+    return s;
+  }
+
+  const A = [3, 7, 2, 9, 1, 5, 4, 8, 6, 10];
+  const B = [1, 4, 2, 3, 6, 2, 7, 5, 3,  8];
+  const r4 = v => +v.toFixed(4);
+
+  let C       = buildC(A, B);
+  let maxIdx  = findMaxIndex(C);
+  let C_after = swapWithFirst(C, maxIdx);
+  let C_sort  = bubbleSort(C_after);
+
+  let lines = [
+    `A:              [${A}]`,
+    `B:              [${B}]`,
+    `C (до):         [${C.map(r4)}]`,
+    `max індекс=${maxIdx}, значення=${r4(C[maxIdx])}`,
+    `C (після swap): [${C_after.map(r4)}]`,
+    ``,
+    `── Сортування бульбашкою ──`,
+    `C до сортування:    [${C_after.map(r4)}]`,
+    `C після сортування: [${C_sort.map(r4)}]`,
+  ];
+  lines.forEach(l => console.log(l));
+  document.getElementById('out-task7').textContent = lines.join('\n');
+})();
+</script>

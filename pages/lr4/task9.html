@@ -1,0 +1,105 @@
+<h2>Завдання №9 — Варіант 4: Текстовий редактор</h2>
+
+<p><strong>Умова (варіант 4):</strong> Реалізувати редактор, який дозволяє виконувати форматування тексту. Обов'язкові елементи форматування: напівжирність, нахил, підкреслювання, колір тексту, регістр символів. Елементи форматування мають бути доступні через кнопки; форматований текст — у окремому вікні на сторінці.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>// Форматування через document.execCommand
+function fmt(cmd, val = null) {
+  document.execCommand(cmd, false, val);
+  document.getElementById('editorArea').focus();
+}
+
+// Зміна регістру через Selection API
+function changeCase(type) {
+  let sel   = window.getSelection();
+  if (!sel.rangeCount) return;
+  let range  = sel.getRangeAt(0);
+  let text   = range.toString();
+  if (!text) return;
+  let result = type === 'upper' ? text.toUpperCase()
+             : type === 'lower' ? text.toLowerCase()
+             : text.replace(/\b\w/g, c => c.toUpperCase());
+  range.deleteContents();
+  range.insertNode(document.createTextNode(result));
+}
+
+function clearEditor() {
+  if (confirm("Очистити весь текст?")) {
+    document.getElementById('editorArea').innerHTML = '';
+  }
+}</code></pre>
+
+<br>
+<p><strong>Результат — живий редактор:</strong></p>
+
+<div id="editor-wrap">
+  <div id="ed-toolbar" style="display:flex;flex-wrap:wrap;gap:6px;padding:10px;background:#f8fafc;border:1.4px solid #e7e7ee;border-radius:10px 10px 0 0">
+    <button onclick="edFmt('bold')"          class="ed-btn"><b>B</b></button>
+    <button onclick="edFmt('italic')"        class="ed-btn"><i>I</i></button>
+    <button onclick="edFmt('underline')"     class="ed-btn"><u>U</u></button>
+    <button onclick="edFmt('strikeThrough')" class="ed-btn"><s>S</s></button>
+    <span style="width:1px;background:#e7e7ee;margin:0 2px;align-self:stretch"></span>
+    <label style="display:flex;align-items:center;gap:4px;font-size:13px">
+      Колір: <input type="color" id="edColorPicker" value="#e11d48"
+        style="width:26px;height:26px;border:none;cursor:pointer;background:none"
+        onchange="edFmt('foreColor', this.value)" />
+    </label>
+    <span style="width:1px;background:#e7e7ee;margin:0 2px;align-self:stretch"></span>
+    <button onclick="edCase('upper')" class="ed-btn" title="ВЕРХНІЙ">AA</button>
+    <button onclick="edCase('lower')" class="ed-btn" title="нижній">aa</button>
+    <button onclick="edCase('title')" class="ed-btn" title="Кожне Слово">Aa</button>
+    <span style="width:1px;background:#e7e7ee;margin:0 2px;align-self:stretch"></span>
+    <button onclick="edFmt('justifyLeft')"   class="ed-btn">≡←</button>
+    <button onclick="edFmt('justifyCenter')" class="ed-btn">≡</button>
+    <button onclick="edFmt('justifyRight')"  class="ed-btn">≡→</button>
+    <span style="width:1px;background:#e7e7ee;margin:0 2px;align-self:stretch"></span>
+    <button onclick="edClear()" class="ed-btn" style="color:#ef4444">✕</button>
+  </div>
+  <div id="editorArea" contenteditable="true" spellcheck="false"
+    style="min-height:140px;border:1.4px solid #e7e7ee;border-top:none;border-radius:0 0 10px 10px;padding:14px;font-size:14px;line-height:1.8;outline:none;background:#fff">
+    Введіть або вставте тут текст. Виділіть фрагмент і натисніть кнопку форматування.
+  </div>
+</div>
+
+<p style="margin-top:10px;color:#555;font-size:13px">
+  💡 Виділи текст → натисни <strong>B / I / U</strong> або обери колір. Для регістру виділи слово → <strong>AA / aa / Aa</strong>.
+</p>
+
+<style>
+.ed-btn {
+  background: white;
+  border: 1.4px solid #d1d5db;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .12s;
+}
+.ed-btn:hover { background: #f3f4f6; }
+</style>
+
+<script>
+function edFmt(cmd, val) {
+  document.execCommand(cmd, false, val || null);
+  document.getElementById('editorArea').focus();
+}
+function edCase(type) {
+  let sel = window.getSelection();
+  if (!sel.rangeCount) return;
+  let range = sel.getRangeAt(0);
+  let text  = range.toString();
+  if (!text) return;
+  let result = type === 'upper' ? text.toUpperCase()
+             : type === 'lower' ? text.toLowerCase()
+             : text.replace(/\b\w/g, c => c.toUpperCase());
+  range.deleteContents();
+  range.insertNode(document.createTextNode(result));
+}
+function edClear() {
+  if (confirm("Очистити весь текст?"))
+    document.getElementById('editorArea').innerHTML = '';
+}
+</script>

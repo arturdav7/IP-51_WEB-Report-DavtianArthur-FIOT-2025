@@ -1,0 +1,67 @@
+<h2>Завдання №3 — Авторизація User1 / User2 / User3</h2>
+
+<p><strong>Умова (варіант парний):</strong> Є декілька користувачів User1, User2, User3 з відповідними паролями. Написати код, який запитуватиме логін (через <code>prompt</code>) і виводить результат в консоль за допомогою шаблонного рядка. Якщо User1/2/3 — запитати пароль; при успіху — <code>alert("Hello, UserX")</code>. Якщо нічого не ввели або Cancel — prompt знову просить логін. В іншому випадку — <code>alert("I don't know you")</code>.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>const user1Login = "User1",  user1Password = "pass1";
+const user2Login = "User2",  user2Password = "pass2";
+const user3Login = "User3",  user3Password = "pass3";
+
+let login = prompt("Введіть логін (User1 / User2 / User3):");
+
+// якщо Cancel або порожнє — повторюємо
+while (login === null || login.trim() === "") {
+  login = prompt("Логін не введено. Спробуйте ще раз:");
+}
+
+console.log(`Введений логін: ${login}`);
+
+if (login === user1Login || login === user2Login || login === user3Login) {
+  let password = prompt(`Введіть пароль для ${login}:`);
+  let correct  = login === user1Login ? user1Password
+               : login === user2Login ? user2Password
+               :                        user3Password;
+  if (password === correct) {
+    alert(`Hello, ${login}`);
+  } else {
+    alert("Невірний пароль!");
+  }
+} else {
+  alert("I don't know you");
+}</code></pre>
+
+<br>
+<button onclick="runTask3()" style="padding:8px 18px;background:#2f9e44;color:white;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">▶ Запустити</button>
+<p style="margin-top:10px;color:#555;font-size:13px">
+  Паролі для тесту: <strong>User1</strong> → <code>pass1</code> | <strong>User2</strong> → <code>pass2</code> | <strong>User3</strong> → <code>pass3</code>
+</p>
+
+<script>
+function runTask3() {
+  const user1Login = "User1",  user1Password = "pass1";
+  const user2Login = "User2",  user2Password = "pass2";
+  const user3Login = "User3",  user3Password = "pass3";
+
+  let login = prompt("Введіть логін (User1 / User2 / User3):");
+  while (login === null || login.trim() === "") {
+    login = prompt("Логін не введено. Спробуйте ще раз:");
+  }
+  console.log(`Введений логін: ${login}`);
+
+  if (login === user1Login || login === user2Login || login === user3Login) {
+    let password = prompt(`Введіть пароль для ${login}:`);
+    let correct  = login === user1Login ? user1Password
+                 : login === user2Login ? user2Password
+                 :                        user3Password;
+    if (password === correct) {
+      alert(`Hello, ${login}`);
+    } else {
+      alert("Невірний пароль!");
+    }
+  } else {
+    alert("I don't know you");
+  }
+}
+</script>

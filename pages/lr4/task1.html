@@ -1,0 +1,56 @@
+<h2>Завдання №1 — Чверті години</h2>
+
+<p><strong>Умова (варіант парний):</strong> Збережіть введене значення часу (год:хвил) (використати метод <code>prompt()</code>) у змінну. Вивести це значення у Console, використовуючи шаблонний рядок. Перевірити до якої чверті години відноситься введене значення. Відповідь вивести за допомогою <code>alert()</code>.</p>
+<p><em>Наприклад: при введенні 10:30 виведе «Перша чверть години»</em></p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>let timeInput = prompt("Введіть час у форматі ГГ:ХВ (наприклад 10:30):");
+
+if (timeInput === null || timeInput.trim() === "") {
+  alert("Значення не введено!");
+} else {
+  console.log(`Введений час: ${timeInput}`);
+if (!/^\d{1,2}:\d{2}$/.test(timeInput)) {
+  alert("Невірний формат! Введіть час у форматі ГГ:ХВ");
+  return;
+}
+  let parts   = timeInput.split(":");
+  let minutes = parseInt(parts[1]);
+
+  let quarter;
+  if      (minutes >= 0  && minutes <= 14) quarter = "Перша чверть години (0–14 хв)";
+  else if (minutes >= 15 && minutes <= 29) quarter = "Друга чверть години (15–29 хв)";
+  else if (minutes >= 30 && minutes <= 44) quarter = "Третя чверть години (30–44 хв)";
+  else                                     quarter = "Четверта чверть години (45–59 хв)";
+
+  alert(quarter);
+}</code></pre>
+
+<br>
+<button onclick="runTask1()" style="padding:8px 18px;background:#2f9e44;color:white;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">▶ Запустити</button>
+<p style="margin-top:10px;color:#555;font-size:13px">Після натискання введіть час у форматі <strong>10:30</strong> — результат з'явиться в alert() та у Console (F12).</p>
+
+<script>
+function runTask1() {
+  let timeInput = prompt("Введіть час у форматі ГГ:ХВ (наприклад 10:30):");
+  if (timeInput === null || timeInput.trim() === "") {
+    alert("Значення не введено!");
+    return;
+  }
+  console.log(`Введений час: ${timeInput}`);
+  if (!/^\d{1,2}:\d{2}$/.test(timeInput)) {
+  alert("Невірний формат! Введіть час у форматі ГГ:ХВ");
+  return;
+}
+  let parts   = timeInput.split(":");
+  let minutes = parseInt(parts[1]);
+  let quarter;
+  if      (minutes >= 0  && minutes <= 14) quarter = "Перша чверть години (0–14 хв)";
+  else if (minutes >= 15 && minutes <= 29) quarter = "Друга чверть години (15–29 хв)";
+  else if (minutes >= 30 && minutes <= 44) quarter = "Третя чверть години (30–44 хв)";
+  else                                     quarter = "Четверта чверть години (45–59 хв)";
+  alert(quarter);
+}
+</script>

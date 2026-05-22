@@ -1,0 +1,65 @@
+<h2>Завдання №8 — Двовимірний масив</h2>
+
+<p><strong>Умова (варіант парний):</strong> Є двовимірний масив додатніх і від'ємних чисел (оголосити, проініціалізувати генератором випадкових чисел). Вивести у Console. Зберегти перший і останній елементи масиву в окремі змінні. Вставити 25 після другого елемента масиву. Вивести у Console.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>// Генератор: числа від -10 до 10 (без 0)
+function randNonZero() {
+  let v;
+  do { v = Math.floor(Math.random() * 21) - 10; } while (v === 0);
+  return v;
+}
+
+// Двовимірний масив 3×4
+let matrix = Array.from({ length: 3 }, () =>
+  Array.from({ length: 4 }, randNonZero)
+);
+
+console.log("Двовимірний масив:");
+matrix.forEach(row => console.log(row));
+
+// Розгортаємо у плаский масив
+let flat = matrix.flat();
+
+let firstElement = flat[0];
+let lastElement  = flat[flat.length - 1];
+console.log(`Перший елемент: ${firstElement}`);
+console.log(`Останній елемент: ${lastElement}`);
+
+// Вставляємо 25 після другого елемента (індекс 2)
+flat.splice(2, 0, 25);
+console.log("Масив після вставки 25 після 2-го елемента:", flat);</code></pre>
+
+<br>
+<p><strong>Результат виконання (Console):</strong></p>
+<div id="out-task8" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#166534;white-space:pre-line"></div>
+
+<script>
+(function() {
+  function randNonZero() {
+    let v;
+    do { v = Math.floor(Math.random() * 21) - 10; } while (v === 0);
+    return v;
+  }
+  let matrix = Array.from({length: 3}, () => Array.from({length: 4}, randNonZero));
+  let flat   = matrix.flat();
+  let firstElement = flat[0];
+  let lastElement  = flat[flat.length - 1];
+  flat.splice(2, 0, 25);
+
+  let lines = [
+    `Двовимірний масив 3×4:`,
+    ...matrix.map((row, i) => `  рядок ${i}: [${row}]`),
+    ``,
+    `Перший елемент:   ${firstElement}`,
+    `Останній елемент: ${lastElement}`,
+    ``,
+    `Масив після вставки 25 після 2-го елемента:`,
+    `  [${flat}]`,
+  ];
+  lines.forEach(l => console.log(l));
+  document.getElementById('out-task8').textContent = lines.join('\n');
+})();
+</script>

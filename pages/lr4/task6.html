@@ -1,0 +1,39 @@
+<h2>Завдання №6 — Функція makeArray()</h2>
+
+<p><strong>Умова (варіант парний):</strong> Написати функцію <code>makeArray(firstArray, secondArray, maxLength)</code>, яка створює новий масив з елементів обох масивів. Якщо довжина перевищує <code>maxLength</code> — повернути перші <code>maxLength</code> елементів. Інакше — повернути весь масив.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>function makeArray(firstArray, secondArray, maxLength) {
+  let newArray = firstArray.concat(secondArray);
+  if (newArray.length > maxLength) {
+    return newArray.slice(0, maxLength);
+  }
+  return newArray;
+}
+
+// Виклики функції:
+console.log( makeArray([1, 2, 3], [4, 5, 6], 5)  );  // [1, 2, 3, 4, 5]
+console.log( makeArray([1, 2], [3, 4], 10)        );  // [1, 2, 3, 4]
+console.log( makeArray([10], [20, 30, 40], 2)     );  // [10, 20]</code></pre>
+
+<br>
+<p><strong>Результат виконання (Console):</strong></p>
+<div id="out-task6" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#166534;white-space:pre-line"></div>
+
+<script>
+(function() {
+  function makeArray(firstArray, secondArray, maxLength) {
+    let newArray = firstArray.concat(secondArray);
+    return newArray.length > maxLength ? newArray.slice(0, maxLength) : newArray;
+  }
+  let lines = [
+    `makeArray([1,2,3],[4,5,6], 5) → [${makeArray([1,2,3],[4,5,6],5)}]`,
+    `makeArray([1,2],[3,4], 10)    → [${makeArray([1,2],[3,4],10)}]`,
+    `makeArray([10],[20,30,40], 2) → [${makeArray([10],[20,30,40],2)}]`,
+  ];
+  lines.forEach(l => console.log(l));
+  document.getElementById('out-task6').textContent = lines.join('\n');
+})();
+</script>

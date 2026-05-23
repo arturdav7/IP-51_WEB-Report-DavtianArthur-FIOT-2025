@@ -217,10 +217,13 @@
     // ── З1-4: concerts ──────────────────────────────────────
     if (page === "z1-4") {
       const concerts = {
-        Київ: new Date("2020-04-01"), Умань: new Date("2025-07-02"),
-        Вінниця: new Date("2020-04-21"), Одеса: new Date("2025-03-15"),
-        Хмельницький: new Date("2020-04-18"), Харків: new Date("2025-07-10"),
-      };
+        Київ:         new Date("2020-04-01"),
+        Умань:        new Date("2027-07-02"),
+        Вінниця:      new Date("2020-04-21"),
+        Одеса:        new Date("2027-03-15"),
+        Хмельницький: new Date("2020-04-18"),
+        Харків:       new Date("2027-07-10"),
+};
       const now = new Date();
       const result = Object.entries(concerts)
         .filter(([, date]) => date > now)

@@ -1,0 +1,23 @@
+<h2>Завдання №2 — SWAP ME</h2>
+
+<p><strong>Умова:</strong> Створити розмітку з текстом, кнопкою та двома інпутами. Після натискання кнопки "SWAP ME" здійснюється обмін вмістом між двома інпутами.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>const btn  = document.querySelector('#swapBtn');
+const inp1 = document.querySelector('#inp1');
+const inp2 = document.querySelector('#inp2');
+
+btn.addEventListener('click', () => {
+  [inp1.value, inp2.value] = [inp2.value, inp1.value];
+});</code></pre>
+
+<br>
+
+<p><strong>Результат:</strong></p>
+<div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+  <button id="swapBtn" style="padding:6px 14px;font-weight:600;cursor:pointer">SWAP ME</button>
+  <input id="inp1" type="text" value="Привіт" style="padding:6px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:14px" />
+  <input id="inp2" type="text" value="Світ" style="padding:6px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:14px" />
+</div>

@@ -16,22 +16,18 @@
   }
 
   function showLab(lab) {
-    groups.forEach((g) => {
-      g.hidden = g.getAttribute("data-lab") !== lab;
-    });
-    tabs.forEach((t) => {
-      t.classList.toggle("active", t.getAttribute("data-lab") === lab);
-    });
+    groups.forEach(g => { g.hidden = g.getAttribute("data-lab") !== lab; });
+    tabs.forEach(t => { t.classList.toggle("active", t.getAttribute("data-lab") === lab); });
   }
 
   function activatePill(hash) {
-    const activeGroup = groups.find((g) => !g.hidden);
+    const activeGroup = groups.find(g => !g.hidden);
     const pills = activeGroup ? activeGroup.querySelectorAll(".pill") : [];
-    pills.forEach((p) => p.classList.toggle("active", p.getAttribute("href") === hash));
+    pills.forEach(p => p.classList.toggle("active", p.getAttribute("href") === hash));
   }
 
   function stripScripts(container) {
-    container.querySelectorAll("script").forEach((s) => s.remove());
+    container.querySelectorAll("script").forEach(s => s.remove());
   }
 
   async function load(lab, page) {
@@ -58,14 +54,14 @@
     load(lab, page);
   }
 
-  tabs.forEach((t) => {
-    t.addEventListener("click", (e) => {
+  tabs.forEach(t => {
+    t.addEventListener("click", e => {
       const href = t.getAttribute("href");
       if (href && href.startsWith("#")) { e.preventDefault(); location.hash = href; }
     });
   });
 
-  document.addEventListener("click", (e) => {
+  document.addEventListener("click", e => {
     const a = e.target.closest("a.pill");
     if (!a) return;
     const href = a.getAttribute("href");
@@ -75,12 +71,10 @@
   window.addEventListener("hashchange", route);
   document.addEventListener("DOMContentLoaded", route);
 
-  // ══════════════════════════════════════════════════════════
-  // Диспетчер сторінок
-  // ══════════════════════════════════════════════════════════
   function initPage(lab, page) {
     if (lab === "lr4") initLr4(page);
     if (lab === "lr5") initLr5(page);
+    if (lab === "lr6") initLr6(page);
   }
 
   // ══════════════════════════════════════════════════════════
@@ -89,260 +83,191 @@
   function initLr4(page) {
     if (page === "task1") {
       window.runTask1 = function () {
-        let timeInput = prompt("Введіть час у форматі ГГ:ХВ (наприклад 10:30):");
-        if (timeInput === null || timeInput.trim() === "") { alert("Значення не введено!"); return; }
-        if (!/^\d{1,2}:\d{2}$/.test(timeInput)) { alert("Невірний формат! Введіть час у форматі ГГ:ХВ"); return; }
-        console.log(`Введений час: ${timeInput}`);
-        let minutes = parseInt(timeInput.split(":")[1]);
-        let quarter;
-        if      (minutes >= 0  && minutes <= 14) quarter = "Перша чверть години (0–14 хв)";
-        else if (minutes >= 15 && minutes <= 29) quarter = "Друга чверть години (15–29 хв)";
-        else if (minutes >= 30 && minutes <= 44) quarter = "Третя чверть години (30–44 хв)";
-        else                                     quarter = "Четверта чверть години (45–59 хв)";
-        alert(quarter);
+        let t = prompt("Введіть час у форматі ГГ:ХВ (наприклад 10:30):");
+        if (!t || t.trim() === "") { alert("Значення не введено!"); return; }
+        if (!/^\d{1,2}:\d{2}$/.test(t)) { alert("Невірний формат!"); return; }
+        console.log(`Введений час: ${t}`);
+        let m = parseInt(t.split(":")[1]), q;
+        if (m<=14) q="Перша чверть (0–14 хв)"; else if(m<=29) q="Друга чверть (15–29 хв)"; else if(m<=44) q="Третя чверть (30–44 хв)"; else q="Четверта чверть (45–59 хв)";
+        alert(q);
       };
     }
     if (page === "task2") {
       window.runTask2 = function () {
-        let day = prompt("Введіть номер дня тижня (1–7):");
-        let finish;
-        switch (day) {
-          case '1': finish = "Понеділок";  break; case '2': finish = "Вівторок";   break;
-          case '3': finish = "Середа";     break; case '4': finish = "Четвер";     break;
-          case '5': finish = "П'ятниця";   break; case '6': finish = "Субота";     break;
-          case '7': finish = "Неділя";     break;
-          default:  finish = "Невірне значення! Введіть число від 1 до 7.";
-        }
-        console.log(finish);
-        document.getElementById("out-task2").textContent = finish;
+        let day=prompt("Введіть номер дня тижня (1–7):"), finish;
+        switch(day){case'1':finish="Понеділок";break;case'2':finish="Вівторок";break;case'3':finish="Середа";break;case'4':finish="Четвер";break;case'5':finish="П'ятниця";break;case'6':finish="Субота";break;case'7':finish="Неділя";break;default:finish="Невірне значення!";}
+        console.log(finish); document.getElementById("out-task2").textContent=finish;
       };
     }
     if (page === "task3") {
       window.runTask3 = function () {
-        const u = [["User1","pass1"],["User2","pass2"],["User3","pass3"]];
-        let login = prompt("Введіть логін (User1 / User2 / User3):");
-        while (login === null || login.trim() === "") login = prompt("Логін не введено. Спробуйте ще раз:");
-        console.log(`Введений логін: ${login}`);
-        const found = u.find(([l]) => l === login);
-        if (found) {
-          const password = prompt(`Введіть пароль для ${login}:`);
-          alert(password === found[1] ? `Hello, ${login}` : "Невірний пароль!");
-        } else { alert("I don't know you"); }
+        const u=[["User1","pass1"],["User2","pass2"],["User3","pass3"]];
+        let login=prompt("Введіть логін:");
+        while(!login||login.trim()==="") login=prompt("Спробуйте ще раз:");
+        console.log(`Логін: ${login}`);
+        const f=u.find(([l])=>l===login);
+        if(f){const p=prompt(`Пароль для ${login}:`);alert(p===f[1]?`Hello, ${login}`:"Невірний пароль!");}else alert("I don't know you");
       };
     }
-    if (page === "task4") {
-      const out = document.getElementById("out-task4");
-      if (!out) return;
-      function getShippingMessage(country, price, deliveryFee) {
-        return `Shipping to ${country} will cost ${price + deliveryFee} credits`;
-      }
-      const lines = [getShippingMessage("Ukraine",500,50),getShippingMessage("Germany",1200,150),getShippingMessage("France",800,95)];
-      lines.forEach(l => console.log(l));
-      out.textContent = lines.join("\n");
-    }
-    if (page === "task5") {
-      const out = document.getElementById("out-task5");
-      if (!out) return;
-      function makeTransaction(q, p, c) { let t=q*p; return t>c?"Insufficient funds!":`You ordered ${q} droids worth ${t} credits!`; }
-      const lines = [`makeTransaction(3,100,500) → ${makeTransaction(3,100,500)}`,`makeTransaction(5,200,500) → ${makeTransaction(5,200,500)}`,`makeTransaction(2,250,500) → ${makeTransaction(2,250,500)}`];
-      lines.forEach(l=>console.log(l)); out.textContent=lines.join("\n");
-    }
-    if (page === "task6") {
-      const out = document.getElementById("out-task6");
-      if (!out) return;
-      function makeArray(a,b,m){let n=a.concat(b);return n.length>m?n.slice(0,m):n;}
-      const lines=[`makeArray([1,2,3],[4,5,6],5) → [${makeArray([1,2,3],[4,5,6],5)}]`,`makeArray([1,2],[3,4],10)    → [${makeArray([1,2],[3,4],10)}]`,`makeArray([10],[20,30,40],2) → [${makeArray([10],[20,30,40],2)}]`];
-      lines.forEach(l=>console.log(l)); out.textContent=lines.join("\n");
-    }
-    if (page === "task7") {
-      const out = document.getElementById("out-task7");
-      if (!out) return;
-      const r4=v=>+v.toFixed(4),A=[3,7,2,9,1,5,4,8,6,10],B=[1,4,2,3,6,2,7,5,3,8];
-      let C=A.map((ai,i)=>ai!==B[i]?1/(ai-B[i]):1);
-      let mi=C.reduce((m,v,i,a)=>v>a[m]?i:m,0);
-      let Ca=[...C]; [Ca[0],Ca[mi]]=[Ca[mi],Ca[0]];
-      let Cs=[...Ca]; for(let i=0;i<Cs.length-1;i++) for(let j=0;j<Cs.length-1-i;j++) if(Cs[j]>Cs[j+1])[Cs[j],Cs[j+1]]=[Cs[j+1],Cs[j]];
-      const lines=[`A: [${A}]`,`B: [${B}]`,`C (до): [${C.map(r4)}]`,`max індекс=${mi}, значення=${r4(C[mi])}`,`C (після swap): [${Ca.map(r4)}]`,``,`── Сортування бульбашкою ──`,`C до: [${Ca.map(r4)}]`,`C після: [${Cs.map(r4)}]`];
-      lines.forEach(l=>console.log(l)); out.textContent=lines.join("\n");
-    }
-    if (page === "task8") {
-      const out = document.getElementById("out-task8");
-      if (!out) return;
-      function rnd(){let v;do{v=Math.floor(Math.random()*21)-10;}while(v===0);return v;}
-      let m=Array.from({length:3},()=>Array.from({length:4},rnd));
-      let flat=m.flat(),fe=flat[0],le=flat[flat.length-1];
-      flat.splice(2,0,25);
-      const lines=[`Двовимірний масив 3×4:`,...m.map((r,i)=>`  рядок ${i}: [${r}]`),``,`Перший елемент: ${fe}`,`Останній елемент: ${le}`,``,`Після вставки 25:`,`  [${flat}]`];
-      lines.forEach(l=>console.log(l)); out.textContent=lines.join("\n");
-    }
-    if (page === "task9") {
-      window.edFmt = (cmd,val) => { document.execCommand(cmd,false,val||null); document.getElementById("editorArea").focus(); };
-      window.edCase = (type) => {
-        let sel=window.getSelection(); if(!sel.rangeCount)return;
-        let range=sel.getRangeAt(0),text=range.toString(); if(!text)return;
-        let r=type==="upper"?text.toUpperCase():type==="lower"?text.toLowerCase():text.replace(/\b\w/g,c=>c.toUpperCase());
-        range.deleteContents(); range.insertNode(document.createTextNode(r));
-      };
-      window.edClear = () => { if(confirm("Очистити весь текст?")) document.getElementById("editorArea").innerHTML=""; };
-      const picker=document.getElementById("edColorPicker");
-      if(picker) picker.addEventListener("change",()=>edFmt("foreColor",picker.value));
-    }
+    if (page==="task4"){const o=document.getElementById("out-task4");if(!o)return;function g(c,p,d){return`Shipping to ${c} will cost ${p+d} credits`;}const l=[g("Ukraine",500,50),g("Germany",1200,150),g("France",800,95)];l.forEach(x=>console.log(x));o.textContent=l.join("\n");}
+    if (page==="task5"){const o=document.getElementById("out-task5");if(!o)return;function mt(q,p,c){let t=q*p;return t>c?"Insufficient funds!":`You ordered ${q} droids worth ${t} credits!`;}const l=[`mt(3,100,500)→${mt(3,100,500)}`,`mt(5,200,500)→${mt(5,200,500)}`,`mt(2,250,500)→${mt(2,250,500)}`];l.forEach(x=>console.log(x));o.textContent=l.join("\n");}
+    if (page==="task6"){const o=document.getElementById("out-task6");if(!o)return;function ma(a,b,m){let n=a.concat(b);return n.length>m?n.slice(0,m):n;}const l=[`[1,2,3]+[4,5,6] max5→[${ma([1,2,3],[4,5,6],5)}]`,`[1,2]+[3,4] max10→[${ma([1,2],[3,4],10)}]`,`[10]+[20,30,40] max2→[${ma([10],[20,30,40],2)}]`];l.forEach(x=>console.log(x));o.textContent=l.join("\n");}
+    if (page==="task7"){const o=document.getElementById("out-task7");if(!o)return;const r=v=>+v.toFixed(4),A=[3,7,2,9,1,5,4,8,6,10],B=[1,4,2,3,6,2,7,5,3,8];let C=A.map((a,i)=>a!==B[i]?1/(a-B[i]):1),mi=C.reduce((m,v,i,a)=>v>a[m]?i:m,0),Ca=[...C];[Ca[0],Ca[mi]]=[Ca[mi],Ca[0]];let Cs=[...Ca];for(let i=0;i<Cs.length-1;i++)for(let j=0;j<Cs.length-1-i;j++)if(Cs[j]>Cs[j+1])[Cs[j],Cs[j+1]]=[Cs[j+1],Cs[j]];const l=[`A:[${A}]`,`B:[${B}]`,`C до:[${C.map(r)}]`,`max idx=${mi} val=${r(C[mi])}`,`C після:[${Ca.map(r)}]`,``,`Бульбашка:`,`до:[${Ca.map(r)}]`,`після:[${Cs.map(r)}]`];l.forEach(x=>console.log(x));o.textContent=l.join("\n");}
+    if (page==="task8"){const o=document.getElementById("out-task8");if(!o)return;function rn(){let v;do{v=Math.floor(Math.random()*21)-10;}while(v===0);return v;}let m=Array.from({length:3},()=>Array.from({length:4},rn)),flat=m.flat(),fe=flat[0],le=flat[flat.length-1];flat.splice(2,0,25);const l=[`2D масив:`,...m.map((r,i)=>`  рядок ${i}: [${r}]`),``,`Перший: ${fe}`,`Останній: ${le}`,``,`Після вставки 25:`,`  [${flat}]`];l.forEach(x=>console.log(x));o.textContent=l.join("\n");}
+    if (page==="task9"){window.edFmt=(c,v)=>{document.execCommand(c,false,v||null);document.getElementById("editorArea").focus();};window.edCase=t=>{let s=window.getSelection();if(!s.rangeCount)return;let r=s.getRangeAt(0),tx=r.toString();if(!tx)return;let res=t==="upper"?tx.toUpperCase():t==="lower"?tx.toLowerCase():tx.replace(/\b\w/g,c=>c.toUpperCase());r.deleteContents();r.insertNode(document.createTextNode(res));};window.edClear=()=>{if(confirm("Очистити?"))document.getElementById("editorArea").innerHTML="";};const p=document.getElementById("edColorPicker");if(p)p.addEventListener("change",()=>edFmt("foreColor",p.value));}
   }
 
   // ══════════════════════════════════════════════════════════
   // ЛР5
   // ══════════════════════════════════════════════════════════
   function initLr5(page) {
-    const set = (id, text) => { const el=document.getElementById(id); if(el) el.textContent=text; };
+    const set=(id,t)=>{const e=document.getElementById(id);if(e)e.textContent=t;};
+    if(page==="z1-2"){const products=[{id:1,name:"Laptop",price:25000},{id:2,name:"Phone",price:12000},{id:3,name:"Tablet",price:8000}];function getProductDetails(productId,successCallback,errorCallback){const product=products.find(p=>p.id===productId);if(product)successCallback(product);else errorCallback(`Товар з id ${productId} не знайдено`);}window.runZ12=function(){const input=parseInt(prompt("Введіть id товару (1, 2 або 3):"));const out=document.getElementById("out-z1-2");getProductDetails(input,product=>{const msg="Знайдено: "+JSON.stringify(product);console.log(msg);if(out)out.textContent=msg;},error=>{const msg="Помилка: "+error;console.log(msg);if(out)out.textContent=msg;});};}
+    if(page==="z1-4"){const concerts={Київ:new Date("2020-04-01"),Умань:new Date("2027-07-02"),Вінниця:new Date("2020-04-21"),Одеса:new Date("2027-03-15"),Хмельницький:new Date("2020-04-18"),Харків:new Date("2027-07-10")};const now=new Date();const r=Object.entries(concerts).filter(([,d])=>d>now).sort(([,a],[,b])=>a-b).map(([c])=>c);console.log(r);set("out-z1-4",JSON.stringify(r));}
+    if(page==="z1-6"){const med=[{name:"Noshpa",price:170},{name:"Analgin",price:55},{name:"Quanil",price:310},{name:"Alphacholine",price:390}];const r=med.map((x,i)=>({id:i+1,name:x.name,price:x.price>300?+(x.price*.7).toFixed(2):x.price}));console.log(r);set("out-z1-6",r.map(x=>JSON.stringify(x)).join("\n"));}
+    if(page==="z1-8"){function Storage(arr){this.items=[...arr];this.getItems=function(){return this.items;};this.addItems=function(x){this.items.push(x);};this.removeItem=function(x){const i=this.items.indexOf(x);if(i!==-1)this.items.splice(i,1);};}window._storage=new Storage(["apple","banana","mango"]);const out=document.getElementById("out-z1-8");const refresh=()=>{if(out)out.textContent="Склад: "+JSON.stringify(window._storage.getItems());};window.storageGetItems=function(){console.log(window._storage.getItems());refresh();};window.storageAddItem=function(){const item=prompt("Введіть назву товару для додавання:");if(item&&item.trim()){window._storage.addItems(item.trim());console.log("Додано:",item.trim());refresh();}};window.storageRemoveItem=function(){const item=prompt("Введіть назву товару для видалення:");if(item&&item.trim()){window._storage.removeItem(item.trim());console.log("Видалено:",item.trim());refresh();}};}
+    if(page==="z1-9"){const tweets=[{id:"000",likes:5,tags:["js","nodejs"]},{id:"001",likes:2,tags:["html","css"]},{id:"002",likes:17,tags:["html","js","nodejs"]},{id:"003",likes:8,tags:["css","react"]},{id:"004",likes:0,tags:["js","nodejs","react"]}];const tc=tweets.reduce((a,t)=>{t.tags.forEach(g=>{a[g]=(a[g]||0)+1;});return a;},{});console.log(tc);set("out-z1-9",JSON.stringify(tc,null,2));}
+    if(page==="z1-10"){function cb(str){const stack=[],pairs={')':'(', '}':'{', ']':'['};for(let c of str){if('({['.includes(c))stack.push(c);else if(')}]'.includes(c))if(stack.pop()!==pairs[c])return false;}return stack.length===0;}window.runCheckBrackets=function(){const input=prompt("Введіть рядок JS коду для перевірки дужок:");if(input===null)return;const result=cb(input);const msg=`checkBrackets("${input}") → ${result}`;console.log(msg);const out=document.getElementById("out-z1-10");if(out)out.textContent=msg;};}
+    if(page==="z2-2"){const people=[{name:'John',age:27},{name:'Jane',age:31},{name:'Bob',age:19}];const r=people.some(p=>p.age<20);console.log(r);set("out-z2-2",`people.some(p => p.age < 20) → ${r}`);}
+    if(page==="z2-4"){const n=[1,2,3,4,5];const r=n.map(x=>x**2);console.log(r);set("out-z2-4",`[${n}].map(n => n²) → [${r}]`);}
+    if(page==="z2-6"){const u=[{name:'John',age:27},{name:'Jane',age:31},{name:'Bob',age:19}];const r=[...u].sort((a,b)=>a.age-b.age);console.log(r);set("out-z2-6",r.map(x=>JSON.stringify(x)).join("\n"));}
+    if(page==="z2-7"){class Calculator{number(v){this.result=v;return this;}getResult(){return this.result;}add(v){this.result+=v;return this;}subtract(v){this.result-=v;return this;}multiply(v){this.result*=v;return this;}divide(v){if(v===0)throw new Error("Ділення на нуль!");this.result/=v;return this;}}window._calc=new Calculator();const out=document.getElementById("out-z2-7");const log=(msg)=>{console.log(msg);if(out)out.textContent+=(out.textContent?"\n":"")+msg;};const getVal=()=>parseFloat(document.getElementById("calcInput").value);window.calcNumber=function(){const v=getVal();window._calc.number(v);log(`number(${v}) → result = ${v}`);};window.calcAdd=function(){const v=getVal();window._calc.add(v);log(`add(${v}) → result = ${window._calc.getResult()}`);};window.calcSubtract=function(){const v=getVal();window._calc.subtract(v);log(`subtract(${v}) → result = ${window._calc.getResult()}`);};window.calcMultiply=function(){const v=getVal();window._calc.multiply(v);log(`multiply(${v}) → result = ${window._calc.getResult()}`);};window.calcDivide=function(){const v=getVal();try{window._calc.divide(v);log(`divide(${v}) → result = ${window._calc.getResult()}`);}catch(e){log(`divide(${v}) → Помилка: ${e.message}`);}};window.calcGetResult=function(){log(`getResult() → ${window._calc.getResult()}`);};window.calcReset=function(){window._calc=new Calculator();if(out)out.textContent="";log("Калькулятор скинуто");};}
+  }
 
-    // ── З1-2: getProductDetails ──────────────────────────────
-    if (page === "z1-2") {
-      const products = [
-        { id: 1, name: "Laptop", price: 25000 },
-        { id: 2, name: "Phone",  price: 12000 },
-        { id: 3, name: "Tablet", price: 8000  },
-      ];
-      function getProductDetails(productId, successCallback, errorCallback) {
-        const product = products.find(p => p.id === productId);
-        if (product) successCallback(product);
-        else errorCallback(`Товар з id ${productId} не знайдено`);
-      }
-      const lines = [];
-      getProductDetails(1, p => lines.push("Знайдено: " + JSON.stringify(p)), e => lines.push("Помилка: " + e));
-      getProductDetails(99, p => lines.push("Знайдено: " + JSON.stringify(p)), e => lines.push("Помилка: " + e));
+  // ══════════════════════════════════════════════════════════
+  // ЛР6
+  // ══════════════════════════════════════════════════════════
+  function initLr6(page) {
+
+    // ── Z2: SWAP ME ─────────────────────────────────────────
+    if (page === "z2") {
+      const btn  = document.querySelector('#swapBtn');
+      const inp1 = document.querySelector('#inp1');
+      const inp2 = document.querySelector('#inp2');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        [inp1.value, inp2.value] = [inp2.value, inp1.value];
+      });
+    }
+
+    // ── Z4: Resize square ───────────────────────────────────
+    if (page === "z4") {
+      const square = document.querySelector('#square');
+      const decBtn = document.querySelector('#decreaseBtn');
+      const incBtn = document.querySelector('#increaseBtn');
+      if (!square) return;
+      decBtn.addEventListener('click', () => {
+        const size = parseInt(square.style.width) - 15;
+        if (size > 15) { square.style.width = size + 'px'; square.style.height = size + 'px'; }
+      });
+      incBtn.addEventListener('click', () => {
+        const size = parseInt(square.style.width) + 15;
+        square.style.width = size + 'px'; square.style.height = size + 'px';
+      });
+    }
+
+    // ── Z6: Double list ─────────────────────────────────────
+    if (page === "z6") {
+      const btn = document.querySelector('#doubleBtn');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#numList li').forEach(li => {
+          li.textContent = li.textContent * 2;
+        });
+      });
+    }
+
+    // ── Z7: Categories DOM ──────────────────────────────────
+    if (page === "z7") {
+      const categories = document.querySelectorAll('#categories li.item');
+      const out = document.getElementById('out-z7');
+      if (!categories.length) return;
+      const lines = [`Number of categories: ${categories.length}`];
+      categories.forEach(item => {
+        const title = item.querySelector('h2').textContent;
+        const count = item.querySelectorAll('li').length;
+        lines.push(`Category: ${title}`);
+        lines.push(`Elements: ${count}`);
+      });
       lines.forEach(l => console.log(l));
-      set("out-z1-2", lines.join("\n"));
+      if (out) out.textContent = lines.join('\n');
     }
 
-    // ── З1-4: concerts ──────────────────────────────────────
-    if (page === "z1-4") {
-      const concerts = {
-        Київ:         new Date("2020-04-01"),
-        Умань:        new Date("2027-07-02"),
-        Вінниця:      new Date("2020-04-21"),
-        Одеса:        new Date("2027-03-15"),
-        Хмельницький: new Date("2020-04-18"),
-        Харків:       new Date("2027-07-10"),
-};
-      const now = new Date();
-      const result = Object.entries(concerts)
-        .filter(([, date]) => date > now)
-        .sort(([, a], [, b]) => a - b)
-        .map(([city]) => city);
-      console.log(result);
-      set("out-z1-4", JSON.stringify(result));
-    }
-
-    // ── З1-6: medicines discount ────────────────────────────
-    if (page === "z1-6") {
-      const medicines = [
-        { name: "Noshpa", price: 170 }, { name: "Analgin", price: 55 },
-        { name: "Quanil", price: 310 }, { name: "Alphacholine", price: 390 },
-      ];
-      const result = medicines.map((item, i) => ({
-        id: i + 1, name: item.name,
-        price: item.price > 300 ? +(item.price * 0.7).toFixed(2) : item.price,
-      }));
-      console.log(result);
-      set("out-z1-6", result.map(r => JSON.stringify(r)).join("\n"));
-    }
-
-    // ── З1-8: Storage ───────────────────────────────────────
-    if (page === "z1-8") {
-      function Storage(initialItems) {
-        this.items = [...initialItems];
-        this.getItems   = function()     { return this.items; };
-        this.addItems   = function(item) { this.items.push(item); };
-        this.removeItem = function(item) { const i=this.items.indexOf(item); if(i!==-1) this.items.splice(i,1); };
-      }
-      const storage = new Storage(["apple","banana","mango"]);
-      const lines = [];
-      lines.push("Початковий склад:      " + JSON.stringify(storage.getItems()));
-      storage.addItems("grape");
-      lines.push("Після додавання grape: " + JSON.stringify(storage.getItems()));
-      storage.removeItem("banana");
-      lines.push("Після видалення banana:" + JSON.stringify(storage.getItems()));
-      lines.forEach(l => console.log(l));
-      set("out-z1-8", lines.join("\n"));
-    }
-
-    // ── З1-9: tag count ─────────────────────────────────────
-    if (page === "z1-9") {
-      const tweets = [
-        { id:"000", likes:5,  tags:["js","nodejs"]          },
-        { id:"001", likes:2,  tags:["html","css"]           },
-        { id:"002", likes:17, tags:["html","js","nodejs"]   },
-        { id:"003", likes:8,  tags:["css","react"]          },
-        { id:"004", likes:0,  tags:["js","nodejs","react"]  },
-      ];
-      const tagCount = tweets.reduce((acc, tweet) => {
-        tweet.tags.forEach(tag => { acc[tag] = (acc[tag] || 0) + 1; });
-        return acc;
-      }, {});
-      console.log(tagCount);
-      set("out-z1-9", JSON.stringify(tagCount, null, 2));
-    }
-
-    // ── З1-10: checkBrackets ────────────────────────────────
-    if (page === "z1-10") {
-      function checkBrackets(str) {
-        const stack = [], pairs = { ')':'(', '}':'{', ']':'[' };
-        for (let char of str) {
-          if ('({['.includes(char)) stack.push(char);
-          else if (')}]'.includes(char)) if (stack.pop() !== pairs[char]) return false;
+    // ── Z8: Login form ──────────────────────────────────────
+    if (page === "z8") {
+      const form = document.querySelector('.login-form');
+      const out  = document.getElementById('out-z8');
+      if (!form) return;
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const email    = form.elements.email.value.trim();
+        const password = form.elements.password.value.trim();
+        if (!email || !password) {
+          alert('All form fields must be filled in');
+          return;
         }
-        return stack.length === 0;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,4}$/;
+        const validDomains = ['gmail.com','yahoo.com','outlook.com','ukr.net','i.ua','meta.ua','hotmail.com'];
+        const emailDomain = email.split('@')[1];
+        if (!emailRegex.test(email)) {
+        alert('Введіть коректний email (наприклад user@gmail.com)');
+          return;
+    }
+if (!validDomains.includes(emailDomain)) {
+  alert(`Домен "${emailDomain}" не підтримується. Використовуйте: ${validDomains.join(', ')}`);
+  return;
+}
+        const userData = { email, password };
+        console.log(userData);
+        if (out) out.textContent = 'Відправлено: ' + JSON.stringify(userData);
+        form.reset();
+      });
+    }
+
+    // ── Z9: Change color ────────────────────────────────────
+    if (page === "z9") {
+      function getRandomHexColor() {
+        return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, 0)}`;
       }
-      const tests = [
-        `checkBrackets("function test() { return [1, 2]; }") → ${checkBrackets("function test() { return [1, 2]; }")}`,
-        `checkBrackets("function test( { return [1, 2]; }") → ${checkBrackets("function test( { return [1, 2]; }")}`,
-        `checkBrackets("const a = (b + c) * [d - e]")       → ${checkBrackets("const a = (b + c) * [d - e]")}`,
-        `checkBrackets("const x = {a: [1, 2}]")             → ${checkBrackets("const x = {a: [1, 2}]")}`,
-      ];
-      tests.forEach(l => console.log(l));
-      set("out-z1-10", tests.join("\n"));
+      const btn       = document.querySelector('.change-color');
+      const colorSpan = document.querySelector('.color');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const color = getRandomHexColor();
+        document.body.style.backgroundColor = color;
+        if (colorSpan) colorSpan.textContent = color;
+      });
     }
 
-    // ── З2-2: some age < 20 ─────────────────────────────────
-    if (page === "z2-2") {
-      const people = [{ name:'John',age:27 },{ name:'Jane',age:31 },{ name:'Bob',age:19 }];
-      const hasYoung = people.some(p => p.age < 20);
-      console.log(hasYoung);
-      set("out-z2-2", `hasYoung → ${hasYoung}`);
-    }
-
-    // ── З2-4: squares ───────────────────────────────────────
-    if (page === "z2-4") {
-      const numbers = [1,2,3,4,5];
-      const squares = numbers.map(n => n ** 2);
-      console.log(squares);
-      set("out-z2-4", `[${numbers}].map(n => n²) → [${squares}]`);
-    }
-
-    // ── З2-6: sort by age ───────────────────────────────────
-    if (page === "z2-6") {
-      const users = [{ name:'John',age:27 },{ name:'Jane',age:31 },{ name:'Bob',age:19 }];
-      const sorted = [...users].sort((a,b) => a.age - b.age);
-      console.log(sorted);
-      set("out-z2-6", sorted.map(u => JSON.stringify(u)).join("\n"));
-    }
-
-    // ── З2-7: Calculator ────────────────────────────────────
-    if (page === "z2-7") {
-      class Calculator {
-        number(v)   { this.result = v; return this; }
-        getResult() { return this.result; }
-        add(v)      { this.result += v; return this; }
-        subtract(v) { this.result -= v; return this; }
-        multiply(v) { this.result *= v; return this; }
-        divide(v)   { if(v===0) throw new Error("Ділення на нуль неможливе!"); this.result/=v; return this; }
+    // ── Z10: Create/Destroy boxes ───────────────────────────
+    if (page === "z10") {
+      function getRandomHexColor() {
+        return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, 0)}`;
       }
-      const result = new Calculator().number(10).add(5).subtract(3).multiply(4).divide(2).getResult();
-      const lines = [`calc.number(10).add(5).subtract(3).multiply(4).divide(2).getResult() → ${result}`];
-      try { new Calculator().number(10).divide(0).getResult(); }
-      catch(e) { lines.push(`Ділення на 0: Помилка — ${e.message}`); }
-      lines.forEach(l => console.log(l));
-      set("out-z2-7", lines.join("\n"));
+      function createBoxes(amount) {
+        const boxes = document.querySelector('#boxes');
+        boxes.innerHTML = '';
+        for (let i = 0; i < amount; i++) {
+          const size = 30 + i * 10;
+          const div  = document.createElement('div');
+          div.style.cssText = `width:${size}px;height:${size}px;background:${getRandomHexColor()};margin-bottom:4px;`;
+          boxes.appendChild(div);
+        }
+      }
+      function destroyBoxes() {
+        const boxes = document.querySelector('#boxes');
+        if (boxes) boxes.innerHTML = '';
+      }
+      const input      = document.querySelector('#controls input');
+      const createBtn  = document.querySelector('[data-create]');
+      const destroyBtn = document.querySelector('[data-destroy]');
+      if (!createBtn) return;
+      createBtn.addEventListener('click', () => {
+        const amount = parseInt(input.value);
+        if (amount >= 1 && amount <= 100) { createBoxes(amount); input.value = ''; }
+        else alert('Введіть число від 1 до 100');
+      });
+      destroyBtn.addEventListener('click', destroyBoxes);
     }
   }
 

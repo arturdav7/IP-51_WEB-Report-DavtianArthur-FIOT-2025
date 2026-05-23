@@ -1,0 +1,30 @@
+<h2>Завдання №9 — Зміна кольору фону</h2>
+
+<p><strong>Умова:</strong> Скрипт змінює колір фону елемента <code>&lt;body&gt;</code> через інлайн-стиль по кліку на <code>button.change-color</code> та задає значення кольору текстовим вмістом для <code>span.color</code>.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
+}
+
+const btn       = document.querySelector('.change-color');
+const colorSpan = document.querySelector('.color');
+
+btn.addEventListener('click', () => {
+  const color = getRandomHexColor();
+  document.body.style.backgroundColor = color;
+  colorSpan.textContent = color;
+});</code></pre>
+
+<br>
+
+<p><strong>Результат:</strong></p>
+<div class="widget" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:16px">
+  <p style="margin:0 0 10px">Background color: <span class="color" style="font-weight:700;font-family:monospace">-</span></p>
+  <button type="button" class="change-color" style="padding:6px 14px;cursor:pointer">Change color</button>
+</div>
+<p style="margin-top:10px;font-size:13px;color:#555">💡 Колір застосовується до <code>&lt;body&gt;</code> — фон всієї сторінки зміниться.</p>

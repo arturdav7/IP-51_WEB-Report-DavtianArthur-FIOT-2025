@@ -1,0 +1,30 @@
+<h2>Завдання №6 — Подвоїти список</h2>
+
+<p><strong>Умова:</strong> Створити розмітку з текстом та маркованим списком. Натиснувши кнопку "Подвоїти", збільшити значення у кожному елементі списку у 2 рази. Повторний натиск також подвоює.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>const doubleBtn = document.querySelector('#doubleBtn');
+
+doubleBtn.addEventListener('click', () => {
+  const items = document.querySelectorAll('#numList li');
+  items.forEach(li => {
+    li.textContent = li.textContent * 2;
+  });
+});</code></pre>
+
+<br>
+
+<p><strong>Результат:</strong></p>
+<div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:16px">
+  <ul id="numList" style="margin:0 0 12px 20px;padding:0">
+    <li>1</li>
+    <li>4</li>
+    <li>8</li>
+    <li>16</li>
+    <li>20</li>
+    <li>30</li>
+  </ul>
+  <button id="doubleBtn" style="padding:6px 14px;cursor:pointer">Подвоїти</button>
+</div>

@@ -1,0 +1,46 @@
+<h2>Завдання №8 — Форма логіна (submit + валідація)</h2>
+
+<p><strong>Умова:</strong> Обробка форми за подією <code>submit</code>. Сторінка не перезавантажується. Якщо поля не заповнені — <code>alert</code>. Якщо заповнені — зібрати дані в об'єкт через <code>elements</code>, вивести в консоль і очистити форму методом <code>reset()</code>.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>const form = document.querySelector('.login-form');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const email    = form.elements.email.value.trim();
+  const password = form.elements.password.value.trim();
+
+  if (!email || !password) {
+    alert('All form fields must be filled in');
+    return;
+  }
+
+  const userData = {
+    email:    form.elements.email.value.trim(),
+    password: form.elements.password.value.trim(),
+  };
+
+  console.log(userData);
+  form.reset();
+});</code></pre>
+
+<br>
+
+<p><strong>Результат:</strong></p>
+<div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:16px">
+  <form class="login-form" style="display:flex;flex-direction:column;gap:10px;max-width:280px">
+    <label style="font-size:13px;font-weight:600">
+      Email
+      <input type="email" name="email" style="display:block;width:100%;padding:6px 10px;margin-top:4px;border:1px solid #d1d5db;border-radius:6px;font-size:14px" />
+    </label>
+    <label style="font-size:13px;font-weight:600">
+      Password
+      <input type="password" name="password" style="display:block;width:100%;padding:6px 10px;margin-top:4px;border:1px solid #d1d5db;border-radius:6px;font-size:14px" />
+    </label>
+    <button type="submit" style="padding:8px;background:#2f9e44;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600">Log in</button>
+  </form>
+  <div id="out-z8" style="margin-top:10px;font-family:monospace;font-size:13px;color:#166534"></div>
+</div>

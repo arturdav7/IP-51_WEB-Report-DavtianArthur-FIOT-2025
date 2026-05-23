@@ -1,0 +1,29 @@
+<h2>Завдання №7 — Навігація по DOM (ul#categories)</h2>
+
+<p><strong>Умова:</strong> Порахувати і вивести в консоль кількість категорій в <code>ul#categories</code>. Для кожного <code>li.item</code> вивести текст заголовку (<code>h2</code>) і кількість вкладених <code>li</code>. Використати <code>forEach()</code> і навігацію по DOM.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>const categories = document.querySelectorAll('#categories li.item');
+
+console.log(`Number of categories: ${categories.length}`);
+
+categories.forEach(item => {
+  const title    = item.querySelector('h2').textContent;
+  const count    = item.querySelectorAll('li').length;
+  console.log(`Category: ${title}`);
+  console.log(`Elements: ${count}`);
+});</code></pre>
+
+<br>
+
+<p><strong>Розмітка (прихована — лише для JS):</strong></p>
+<ul id="categories" style="display:none">
+  <li class="item"><h2>Animals</h2><ul><li>Cat</li><li>Hamster</li><li>Horse</li><li>Parrot</li></ul></li>
+  <li class="item"><h2>Products</h2><ul><li>Bread</li><li>Prasley</li><li>Cheese</li></ul></li>
+  <li class="item"><h2>Technologies</h2><ul><li>HTML</li><li>CSS</li><li>JavaScript</li><li>React</li><li>Node.js</li></ul></li>
+</ul>
+
+<p><strong>Результат виконання (Console):</strong></p>
+<div id="out-z7" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#166534;white-space:pre-line"></div>

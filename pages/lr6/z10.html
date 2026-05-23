@@ -1,0 +1,59 @@
+<h2>Завдання №10 — Create / Destroy boxes</h2>
+
+<p><strong>Умова:</strong> Інпут для введення кількості елементів (1–100). Кнопка <strong>Create</strong> — рендерить колекцію div-елементів (кожен наступний на 10px більший, випадковий колір). Кнопка <strong>Destroy</strong> — очищає колекцію.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16).padStart(6, 0)}`;
+}
+
+function createBoxes(amount) {
+  const boxes = document.querySelector('#boxes');
+  boxes.innerHTML = '';
+  for (let i = 0; i < amount; i++) {
+    const size = 30 + i * 10;
+    const div  = document.createElement('div');
+    div.style.cssText = `
+      width:${size}px; height:${size}px;
+      background:${getRandomHexColor()};
+      margin-bottom:4px;
+    `;
+    boxes.appendChild(div);
+  }
+}
+
+function destroyBoxes() {
+  document.querySelector('#boxes').innerHTML = '';
+}
+
+const input      = document.querySelector('#controls input');
+const createBtn  = document.querySelector('[data-create]');
+const destroyBtn = document.querySelector('[data-destroy]');
+
+createBtn.addEventListener('click', () => {
+  const amount = parseInt(input.value);
+  if (amount >= 1 && amount <= 100) {
+    createBoxes(amount);
+    input.value = '';
+  } else {
+    alert('Введіть число від 1 до 100');
+  }
+});
+
+destroyBtn.addEventListener('click', destroyBoxes);</code></pre>
+
+<br>
+
+<p><strong>Результат:</strong></p>
+<div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:16px">
+  <div id="controls" style="display:flex;gap:8px;align-items:center;margin-bottom:12px">
+    <input type="number" min="1" max="100" step="1" placeholder="1–100"
+      style="padding:6px 10px;border:1px solid #d1d5db;border-radius:6px;width:80px;font-size:14px" />
+    <button type="button" data-create style="padding:6px 14px;cursor:pointer;background:#2f9e44;color:white;border:none;border-radius:6px;font-weight:600">Create</button>
+    <button type="button" data-destroy style="padding:6px 14px;cursor:pointer;background:#ef4444;color:white;border:none;border-radius:6px;font-weight:600">Destroy</button>
+  </div>
+  <div id="boxes"></div>
+</div>

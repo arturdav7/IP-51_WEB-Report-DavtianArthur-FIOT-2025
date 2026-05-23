@@ -1,0 +1,33 @@
+<h2>Завдання №4 — Зменшити / Збільшити квадрат</h2>
+
+<p><strong>Умова:</strong> Створити розмітку з текстом, блоком (div) та двома кнопками. Кнопка "Зменшити" зменшує квадрат на 15px, "Збільшити" — збільшує на 15px. Повторний натиск продовжує змінювати розмір.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>const square      = document.querySelector('#square');
+const decreaseBtn = document.querySelector('#decreaseBtn');
+const increaseBtn = document.querySelector('#increaseBtn');
+
+decreaseBtn.addEventListener('click', () => {
+  const size = parseInt(square.style.width) - 15;
+  if (size > 15) {
+    square.style.width  = size + 'px';
+    square.style.height = size + 'px';
+  }
+});
+
+increaseBtn.addEventListener('click', () => {
+  const size = parseInt(square.style.width) + 15;
+  square.style.width  = size + 'px';
+  square.style.height = size + 'px';
+});</code></pre>
+
+<br>
+
+<p><strong>Результат:</strong></p>
+<div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:16px">
+  <div id="square" style="width:100px;height:100px;border:2px dashed red;margin-bottom:12px"></div>
+  <button id="decreaseBtn" style="padding:6px 14px;cursor:pointer;margin-right:8px">Зменшити</button>
+  <button id="increaseBtn" style="padding:6px 14px;cursor:pointer">Збільшити</button>
+</div>

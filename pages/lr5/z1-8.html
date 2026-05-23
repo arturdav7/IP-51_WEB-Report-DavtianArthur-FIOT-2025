@@ -1,0 +1,40 @@
+<h2>Завдання №1 — Варіант 8: Функція-конструктор Storage</h2>
+
+<p><strong>Умова:</strong> Написати функцію-конструктор <code>Storage</code> для управління складом товарів. При виклику отримує початковий масив товарів і записує їх у властивість <code>items</code>. Методи: <code>getItems()</code>, <code>addItems(item)</code>, <code>removeItem(item)</code>.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>function Storage(initialItems) {
+  this.items = [...initialItems];
+
+  this.getItems = function () {
+    return this.items;
+  };
+
+  this.addItems = function (item) {
+    this.items.push(item);
+  };
+
+  this.removeItem = function (item) {
+    const index = this.items.indexOf(item);
+    if (index !== -1) {
+      this.items.splice(index, 1);
+    }
+  };
+}
+
+const arr = ["apple", "banana", "mango"];
+const storage = new Storage(arr);
+
+console.log("Початковий склад:", storage.getItems());
+
+storage.addItems("grape");
+console.log("Після додавання grape:", storage.getItems());
+
+storage.removeItem("banana");
+console.log("Після видалення banana:", storage.getItems());</code></pre>
+
+<br>
+<p><strong>Результат виконання (Console):</strong></p>
+<div id="out-z1-8" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#166534;white-space:pre-line"></div>

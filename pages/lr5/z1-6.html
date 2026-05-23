@@ -1,0 +1,28 @@
+<h2>Завдання №1 — Варіант 6: Медикаменти (знижка 30%)</h2>
+
+<p><strong>Умова:</strong> Написати функцію, яка приймає масив об'єктів і повертає новий масив об'єктів, у якому є знижка 30% на всі медикаменти, ціна яких перевищує 300 грн. Надати id для кожного медикамента.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>const medicines = [
+  { name: "Noshpa",       price: 170 },
+  { name: "Analgin",      price: 55  },
+  { name: "Quanil",       price: 310 },
+  { name: "Alphacholine", price: 390 },
+];
+
+const applyDiscount = arr => arr.map((item, index) => ({
+  id:    index + 1,
+  name:  item.name,
+  price: item.price > 300
+    ? +(item.price * 0.7).toFixed(2)  // знижка 30%
+    : item.price,
+}));
+
+const result = applyDiscount(medicines);
+console.log(result);</code></pre>
+
+<br>
+<p><strong>Результат виконання (Console):</strong></p>
+<div id="out-z1-6" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#166534;white-space:pre-line"></div>

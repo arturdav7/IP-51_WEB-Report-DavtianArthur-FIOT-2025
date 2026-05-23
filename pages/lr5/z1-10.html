@@ -1,0 +1,30 @@
+<h2>Завдання №1 — Варіант 10: checkBrackets(str)</h2>
+
+<p><strong>Умова:</strong> Написати функцію <code>checkBrackets(str)</code>, яка приймає рядок JS коду і перевіряє правильність закриття дужок <code>()</code>, <code>{}</code>, <code>[]</code>. Якщо рядок містить коректний код — повертає <code>true</code>, інакше — <code>false</code>.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>function checkBrackets(str) {
+  const stack = [];
+  const pairs = { ')': '(', '}': '{', ']': '[' };
+
+  for (let char of str) {
+    if ('({['.includes(char)) {
+      stack.push(char);                           // відкриваюча — в стек
+    } else if (')}]'.includes(char)) {
+      if (stack.pop() !== pairs[char]) return false; // не співпадає
+    }
+  }
+
+  return stack.length === 0; // стек порожній — всі дужки закриті
+}
+
+console.log(checkBrackets("function test() { return [1, 2]; }"));  // true
+console.log(checkBrackets("function test( { return [1, 2]; }"));   // false
+console.log(checkBrackets("const a = (b + c) * [d - e]"));         // true
+console.log(checkBrackets("const x = {a: [1, 2}]"));               // false</code></pre>
+
+<br>
+<p><strong>Результат виконання (Console):</strong></p>
+<div id="out-z1-10" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#166534;white-space:pre-line"></div>

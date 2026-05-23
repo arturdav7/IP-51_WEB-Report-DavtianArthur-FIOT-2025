@@ -1,0 +1,21 @@
+<h2>Завдання №2 — Варіант 2: Перевірка віку (some)</h2>
+
+<p><strong>Умова:</strong> Дано масив об'єктів. Перевірте, чи є хоча б один об'єкт з віком менше 20 років.</p>
+<p><em>Очікуваний результат: true</em></p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>const people = [
+  { name: 'John', age: 27 },
+  { name: 'Jane', age: 31 },
+  { name: 'Bob',  age: 19 },
+];
+
+const hasYoung = people.some(person => person.age < 20);
+
+console.log(hasYoung); // true</code></pre>
+
+<br>
+<p><strong>Результат виконання (Console):</strong></p>
+<div id="out-z2-2" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#166534;white-space:pre-line"></div>

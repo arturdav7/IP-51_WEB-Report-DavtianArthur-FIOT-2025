@@ -1,0 +1,22 @@
+<h2>Завдання №2 — Варіант 6: Сортування за віком (sort)</h2>
+
+<p><strong>Умова:</strong> Відсортувати масив об'єктів за віком у порядку зростання.</p>
+<p><em>Очікуваний результат: [{name:"Bob",age:19}, {name:"John",age:27}, {name:"Jane",age:31}]</em></p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>const users = [
+  { name: 'John', age: 27 },
+  { name: 'Jane', age: 31 },
+  { name: 'Bob',  age: 19 },
+];
+
+const sorted = [...users].sort((a, b) => a.age - b.age);
+
+console.log(sorted);
+// [{name:"Bob",age:19},{name:"John",age:27},{name:"Jane",age:31}]</code></pre>
+
+<br>
+<p><strong>Результат виконання (Console):</strong></p>
+<div id="out-z2-6" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#166534;white-space:pre-line"></div>

@@ -1,0 +1,39 @@
+<h2>Завдання №1 — Варіант 2: getProductDetails (callback)</h2>
+
+<p><strong>Умова:</strong> Написати функцію <code>getProductDetails(productId, successCallback, errorCallback)</code>, яка отримує деталі про вказаний товар та передає їх у <code>successCallback</code>. Якщо товар не знайдено — викликається <code>errorCallback</code> з повідомленням про помилку.</p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>const products = [
+  { id: 1, name: "Laptop",  price: 25000 },
+  { id: 2, name: "Phone",   price: 12000 },
+  { id: 3, name: "Tablet",  price: 8000  },
+];
+
+function getProductDetails(productId, successCallback, errorCallback) {
+  const product = products.find(p => p.id === productId);
+  if (product) {
+    successCallback(product);
+  } else {
+    errorCallback(`Товар з id ${productId} не знайдено`);
+  }
+}
+
+// Виклик — товар існує
+getProductDetails(
+  1,
+  product => console.log("Знайдено:", product),
+  error   => console.log("Помилка:", error)
+);
+
+// Виклик — товар не існує
+getProductDetails(
+  99,
+  product => console.log("Знайдено:", product),
+  error   => console.log("Помилка:", error)
+);</code></pre>
+
+<br>
+<p><strong>Результат виконання (Console):</strong></p>
+<div id="out-z1-2" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#166534;white-space:pre-line"></div>

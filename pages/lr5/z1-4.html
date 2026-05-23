@@ -1,0 +1,29 @@
+<h2>Завдання №1 — Варіант 4: Концерти (фільтрація + сортування)</h2>
+
+<p><strong>Умова:</strong> З об'єкту <code>concerts</code> отримати масив міст. Прибрати міста, в яких концерт вже пройшов. Відсортувати у хронологічному порядку. Застосувати стрілочні функції.</p>
+<p><em>Очікуваний результат: ["Одеса", "Умань", "Харків"]</em></p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>const concerts = {
+  Київ:         new Date("2020-04-01"),
+  Умань:        new Date("2025-07-02"),
+  Вінниця:      new Date("2020-04-21"),
+  Одеса:        new Date("2025-03-15"),
+  Хмельницький: new Date("2020-04-18"),
+  Харків:       new Date("2025-07-10"),
+};
+
+const now = new Date();
+
+const result = Object.entries(concerts)
+  .filter(([city, date]) => date > now)       // лише майбутні
+  .sort(([, a], [, b]) => a - b)              // хронологічно
+  .map(([city]) => city);                     // лише назви міст
+
+console.log(result); // ["Одеса", "Умань", "Харків"]</code></pre>
+
+<br>
+<p><strong>Результат виконання (Console):</strong></p>
+<div id="out-z1-4" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#166534;white-space:pre-line"></div>

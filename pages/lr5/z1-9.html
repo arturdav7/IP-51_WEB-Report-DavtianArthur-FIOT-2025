@@ -1,0 +1,29 @@
+<h2>Завдання №1 — Варіант 9: Підрахунок тегів (tweets)</h2>
+
+<p><strong>Умова:</strong> Повернути об'єкт, в якому вказано кількість тегів.</p>
+<p><em>Очікуваний результат: {js: 3, nodejs: 3, html: 2, css: 2, react: 2}</em></p>
+
+<br>
+
+<p><strong>Програмний код:</strong></p>
+<pre><code>const tweets = [
+  { id: "000", likes: 5,  tags: ["js", "nodejs"]           },
+  { id: "001", likes: 2,  tags: ["html", "css"]            },
+  { id: "002", likes: 17, tags: ["html", "js", "nodejs"]   },
+  { id: "003", likes: 8,  tags: ["css", "react"]           },
+  { id: "004", likes: 0,  tags: ["js", "nodejs", "react"]  },
+];
+
+const tagCount = tweets.reduce((acc, tweet) => {
+  tweet.tags.forEach(tag => {
+    acc[tag] = (acc[tag] || 0) + 1;
+  });
+  return acc;
+}, {});
+
+console.log(tagCount);
+// {js: 3, nodejs: 3, html: 2, css: 2, react: 2}</code></pre>
+
+<br>
+<p><strong>Результат виконання (Console):</strong></p>
+<div id="out-z1-9" style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#166534;white-space:pre-line"></div>
